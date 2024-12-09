@@ -44,13 +44,28 @@ def list_firmwares():
 @firmwares_bp.route("/<firmware>")
 def firmware_details(firmware):
     """
-    List all devices that have loaded a specific firmware (formerly devices_by_firmware).
+    List all devices that currently have the specified firmware loaded.
     """
     current_app.logger.debug(f"Rendering firmware details for: {firmware}")
-    devices = (db.session.query(HwFirmware)
-               .filter(HwFirmware.base_name == firmware)
-               .order_by(HwFirmware.datetime.desc())
-               .all())
+
+    # Subquery to get the latest firmware per device
+    subq = (
+        db.session.query(
+            HwFirmware.serialHex,
+            func.max(HwFirmware.datetime).label("latest_dt")
+        )
+        .group_by(HwFirmware.serialHex)
+        .subquery()
+    )
+
+    # Query to find devices with the specified firmware as their latest
+    devices = (
+        db.session.query(HwFirmware)
+        .join(subq, (HwFirmware.serialHex == subq.c.serialHex) & (HwFirmware.datetime == subq.c.latest_dt))
+        .filter(HwFirmware.base_name == firmware)
+        .order_by(HwFirmware.serialHex.asc())
+        .all()
+    )
 
     device_list = [
         {
