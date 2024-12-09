@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Devices with Firmware: {{ firmware }}</h2>
+<p>Below is a list of all devices that have loaded this firmware:</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Serial Number</th>
+            <th>Load Timestamp</th>
+            <th>Gold Image</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for device in device_list %}
+        <tr>
+            <td>{{ device.index }}</td>
+            <td><a href="{{ device.serial_link }}" class="text-decoration-none">{{ device.serial_number }}</a></td>
+            <td>{{ device.datetime }}</td>
+            <td>{{ device.goldImg }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<a href="/firmwares" class="btn btn-primary mt-3">Back to Firmware List</a>
+{% endblock %}

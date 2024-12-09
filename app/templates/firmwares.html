@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Firmwares</h2>
+<p>Below is a list of all available firmwares based on the latest firmware loaded for each device:</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Firmware</th>
+            <th>Devices Count</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for firmware in firmware_list %}
+        <tr>
+            <td>{{ firmware.index }}</td>
+            <td>
+                <a href="/firmwares/{{ firmware.base_name }}" class="text-decoration-none">
+                    {{ firmware.base_name }}
+                </a>
+            </td>
+            <td>{{ firmware.count }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<a href="/" class="btn btn-primary mt-3">Back to Home</a>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Devices</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Device Name</th>
+            <th>Serial Number</th>
+            <th>Current Version</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for dev in devices %}
+        <tr>
+            <td>
+                <a href="/device-types/{{ dev.device_name }}" class="text-decoration-none">
+                    {{ dev.device_name }}
+                </a>
+            </td>
+                        <td>
+              <a href="/devices/{{ dev.serial_number }}">{{ dev.serial_number }}</a>
+            </td>
+            <td>{{ dev.version }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Device Types</h2>
+<p>Below is a list of all distinct device types:</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Device Type</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for idx, device_name in indexed_device_types %}
+        <tr>
+            <td>{{ idx }}</td>
+            <td>
+                <a href="/device-types/{{ device_name }}" class="text-decoration-none">
+                    {{ device_name }}
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<a href="/" class="btn btn-primary mt-3">Back to Home</a>
+{% endblock %}

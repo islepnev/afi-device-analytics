@@ -1,0 +1,25 @@
+/* app/static/css/style.css */
+
+/* Make the entire card clickable */
+.clickable-card {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.clickable-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Remove underline from links inside cards */
+.clickable-card a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Ensure the entire card is clickable without affecting inner links */
+.clickable-card a {
+    display: block;
+    height: 100%;
+    width: 100%;
+}

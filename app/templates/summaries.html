@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Summaries</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Device Name</th>
+            <th>Version</th>
+            <th>Count</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for row in summary_rows %}
+        <tr>
+            <td>{{ row.device_name|safe }}</td>
+            <td>{{ row.version }}</td>
+            <td>{{ row.count }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

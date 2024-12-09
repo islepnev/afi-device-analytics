@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-4">
+        <a href="/devices/" class="text-decoration-none">
+            <div class="card text-center border-primary clickable-card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Devices</h5>
+                    <p class="card-text display-4">{{ totals.total_devices }}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="/devices/device-types" class="text-decoration-none">
+            <div class="card text-center border-success clickable-card">
+                <div class="card-body">
+                    <h5 class="card-title">Device Types</h5>
+                    <p class="card-text display-4">{{ totals.total_device_types }}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="/firmwares" class="text-decoration-none">
+            <div class="card text-center border-info clickable-card">
+                <div class="card-body">
+                    <h5 class="card-title">Firmwares</h5>
+                    <p class="card-text display-4">{{ totals.total_versions }}</p>
+                </div>
+            </div>
+        </a>        
+    </div>
+</div>
+
+<p></p>
+
+<h3>Last 10 Loaded Firmwares</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Datetime</th>
+            <th>Serial Number</th>
+            <th>Firmware</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for record in latest_firmwares %}
+        <tr>
+            <td>{{ record.datetime |format_datetime }}</td>
+            <td>
+                <a href="{{ record.serial_link }}" class="text-decoration-none">
+                    {{ record.serial_number }}
+                </a>
+            </td>
+            <td>
+                <a href="{{ record.firmware_link }}" class="text-decoration-none">
+                    {{ record.firmware }}
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<a href="/history" class="btn btn-link">View more...</a>
+
+{% endblock %}

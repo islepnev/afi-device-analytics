@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Firmware Load History</h2>
+<p>Below is the list of the last 1000 loaded firmware records:</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Datetime</th>
+            <th>Serial Number</th>
+            <th>Firmware</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for record in history %}
+        <tr>
+            <td>{{ record.datetime |format_datetime}}</td>
+            <td>
+                <a href="{{ record.serial_link }}" class="text-decoration-none">
+                    {{ record.serial_number }}
+                </a>
+            </td>
+            <td>
+                <a href="{{ record.firmware_link }}" class="text-decoration-none">
+                    {{ record.firmware }}
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<a href="/" class="btn btn-primary mt-3">Back to Home</a>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Device: {{ serial_number }}</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Datetime</th>
+            <th>Version</th>
+            <th>Firmware</th>
+            <th>Gold Image</th>
+            <th>Path</th>
+            <th>From Host</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for fw in history %}
+        <tr>
+            <td>{{ fw.datetime }}</td>
+            <td>{{ fw.version }}</td>
+            <td><a href="{{ fw.firmware_link }}" class="text-decoration-none">{{ fw.firmware }}</a></td>
+            <td>{{ fw.goldImg }}</td>
+            <td>{{ fw.path }}</td>
+            <td>{{ fw.fromHost }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<a href="/" class="btn btn-primary mt-3">Back to Home</a>
+{% endblock %}

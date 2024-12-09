@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Devices for Device Type: {{ device_type }}</h2>
+<p>Below is a list of all devices that belong to this device type:</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Serial Number</th>
+            <th>Firmware</th>
+            <th>Load Timestamp</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for device in device_list %}
+        <tr>
+            <td>{{ device.index }}</td>
+            <td>
+                <a href="{{ device.serial_link }}" class="text-decoration-none">
+                    {{ device.serial_number }}
+                </a>
+            </td>
+            <td>
+                <a href="{{ device.firmware_link }}" class="text-decoration-none">
+                    {{ device.firmware }}
+                </a>
+            </td>
+            <td>{{ device.datetime }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<a href="/device-types" class="btn btn-primary mt-3">Back to Device Types</a>
+{% endblock %}
