@@ -1,0 +1,6 @@
+pandas
+sqlalchemy
+pymysql
+python-dotenv
+tabulate
+jinja2

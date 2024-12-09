@@ -1,0 +1,8 @@
+## Version Summary
+
+| device_name | version | latest timestamp       | count |
+|-------------|---------|------------------------|-------|
+{% for row in version_summary -%}
+| {{ row.device_name }} | {{ row.version }} | {{ row['latest timestamp'] }} | {{ row.count }} |
+{% endfor -%}
+| **Total**   |         |                        | **{{ total_devices }}** |

@@ -1,0 +1,8 @@
+## Device Summary
+
+| device_name | count |
+|-------------|-------|
+{% for row in device_summary[:-1] -%}
+| {{ row.device_name }} | {{ row.count }} |
+{% endfor -%}
+| **{{ device_summary[-1].device_name }}** | **{{ device_summary[-1].count }}** |
