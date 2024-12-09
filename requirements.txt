@@ -1,6 +1,6 @@
-pandas
-sqlalchemy
-pymysql
-python-dotenv
-tabulate
-jinja2
+Flask>=2.2,<4.0
+Flask-SQLAlchemy>=2.5,<4.0
+python-dotenv>=1.0,<2.0
+pymysql>=1.0,<2.0
+Jinja2>=3.1,<4.0
+pytz>=2023.0,<2025.0
