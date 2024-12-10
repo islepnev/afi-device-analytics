@@ -26,7 +26,7 @@
                     {{ device.firmware }}
                 </a>
             </td>
-            <td>{{ device.datetime }}</td>
+            <td>{{ device.datetime |format_datetime }}</td>
         </tr>
     {% endfor %}
     </tbody>

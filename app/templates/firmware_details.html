@@ -17,7 +17,7 @@
         <tr>
             <td>{{ device.index }}</td>
             <td><a href="{{ device.serial_link }}" class="text-decoration-none">{{ device.serial_number }}</a></td>
-            <td>{{ device.datetime }}</td>
+            <td>{{ device.datetime |format_datetime }}</td>
             <td>{{ device.goldImg }}</td>
         </tr>
     {% endfor %}
