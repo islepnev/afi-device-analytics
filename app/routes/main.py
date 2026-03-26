@@ -7,23 +7,23 @@ import re
 main_bp = Blueprint('main', __name__)
 
 # Regex to extract version info from base_name
-pattern = re.compile(r"^(?P<device_name>.+)-(?P<version>[^-]+)-(?P<revision>[^-]+)-g(?P<git_hash>[a-fA-F0-9]+)\.(bit|bin|mcs)$")
+pattern = re.compile(r"^(?P<firmware_type>.+)-(?P<version>[^-]+)-(?P<revision>[^-]+)-g(?P<git_hash>[a-fA-F0-9]+)\.(bit|bin|mcs)$")
 
 def get_totals():
     """
     Calculate total counts:
     - Total devices (distinct serial numbers)
-    - Total device_name (Firmware Types, derived from base_name)
+    - Total firmware_type (Firmware Types, derived from base_name)
     - Total Firmware Versions (distinct base_name for the latest firmware per device)
     Fetch the last 10 loaded firmware records.
     """
     # Total devices: distinct serialHex
     total_devices = db.session.query(func.count(func.distinct(HwFirmware.serialHex))).scalar()
 
-    # Total device_name (Firmware Types): distinct device_name extracted from base_name
+    # Total firmware_type (Firmware Types): distinct firmware_type extracted from base_name
     base_names = db.session.query(HwFirmware.base_name).distinct()
-    device_names = {pattern.match(bn.base_name).group("device_name") for bn in base_names if pattern.match(bn.base_name)}
-    total_device_types = len(device_names)
+    firmware_types = {pattern.match(bn.base_name).group("firmware_type") for bn in base_names if pattern.match(bn.base_name)}
+    total_firmware_types = len(firmware_types)
 
     # Total Firmware Versions: count distinct base_name for the latest firmware per device
     subq = (
@@ -62,7 +62,7 @@ def get_totals():
 
     return {
         "total_devices": total_devices,
-        "total_device_types": total_device_types,
+        "total_firmware_types": total_firmware_types,
         "total_versions": total_versions,
         "latest_firmwares": latest_firmwares,
     }

@@ -2,7 +2,7 @@ from flask import Flask
 
 from .config import load_config
 from .db import init_db
-from .routes.device_types import device_types_bp
+from .routes.firmware_types import firmware_types_bp
 from .routes.devices import devices_bp
 from .routes.firmwares import firmwares_bp
 from .routes.history import history_bp
@@ -24,6 +24,6 @@ def create_app():
     app.register_blueprint(devices_bp, url_prefix="/devices")
     app.register_blueprint(firmwares_bp, url_prefix="/firmwares")
     app.register_blueprint(history_bp, url_prefix="/history")
-    app.register_blueprint(device_types_bp, url_prefix="/device-types")
+    app.register_blueprint(firmware_types_bp, url_prefix="/firmware-types")
 
     return app

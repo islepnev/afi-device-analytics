@@ -6,7 +6,7 @@ import re
 
 devices_bp = Blueprint('devices', __name__)
 
-pattern = re.compile(r"^(?P<device_name>.+)-(?P<version>[^-]+)-(?P<revision>[^-]+)-g(?P<git_hash>[a-fA-F0-9]+)\.(bit|bin|mcs)$")
+pattern = re.compile(r"^(?P<firmware_type>.+)-(?P<version>[^-]+)-(?P<revision>[^-]+)-g(?P<git_hash>[a-fA-F0-9]+)\.(bit|bin|mcs)$")
 
 def get_current_firmware_for_all_devices():
     subq = (db.session.query(
@@ -24,15 +24,15 @@ def get_current_firmware_for_all_devices():
     for fw in latest_records:
         match = pattern.match(fw.base_name)
         if match:
-            device_name = match.group("device_name")
+            firmware_type = match.group("firmware_type")
             version = match.group("version")
         else:
-            device_name = "Unknown"
+            firmware_type = "Unknown"
             version = "Unknown"
 
         results.append({
             "serial_number": fw.serialHex.upper(),
-            "device_name": device_name,
+            "firmware_type": firmware_type,
             "version": version
         })
     return results
@@ -41,8 +41,8 @@ def get_current_firmware_for_all_devices():
 def list_devices():
     current_app.logger.debug("Rendering devices list")
     devices_info = get_current_firmware_for_all_devices()
-    # Sort by device_name
-    devices_info = sorted(devices_info, key=lambda x: (x["device_name"], x["serial_number"]))
+    # Sort by firmware_type
+    devices_info = sorted(devices_info, key=lambda x: (x["firmware_type"], x["serial_number"]))
     return render_template("device_list.html", devices=devices_info)
 
 @devices_bp.route("/<serial_number>")
@@ -71,20 +71,20 @@ def device_detail(serial_number):
     return render_template("device_detail.html", serial_number=serial_number.upper(), history=history)
 
 
-def get_device_types():
+def get_firmware_types():
     """
-    Fetch distinct firmware types (device_name) from base_name in hw_firmware.
+    Fetch distinct firmware types (firmware_type) from base_name in hw_firmware.
     """
     base_names = db.session.query(HwFirmware.base_name).distinct()
-    device_names = {pattern.match(bn.base_name).group("device_name") for bn in base_names if pattern.match(bn.base_name)}
-    return sorted(device_names)
+    firmware_types = {pattern.match(bn.base_name).group("firmware_type") for bn in base_names if pattern.match(bn.base_name)}
+    return sorted(firmware_types)
 
-@devices_bp.route("/device-types")
-def list_device_types():
+@devices_bp.route("/firmware-types")
+def list_firmware_types():
     """
     List distinct firmware types.
     """
     current_app.logger.debug("Rendering firmware types list")
-    device_types = get_device_types()
-    indexed_device_types = [(idx + 1, name) for idx, name in enumerate(device_types)]
-    return render_template("device_types.html", indexed_device_types=indexed_device_types)
+    firmware_types = get_firmware_types()
+    indexed_firmware_types = [(idx + 1, name) for idx, name in enumerate(firmware_types)]
+    return render_template("firmware_types.html", indexed_firmware_types=indexed_firmware_types)

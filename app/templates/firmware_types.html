@@ -11,12 +11,12 @@
         </tr>
     </thead>
     <tbody>
-    {% for idx, device_name in indexed_device_types %}
+    {% for idx, firmware_type in indexed_firmware_types %}
         <tr>
             <td>{{ idx }}</td>
             <td>
-                <a href="/device-types/{{ device_name }}" class="text-decoration-none">
-                    {{ device_name }}
+                <a href="/firmware-types/{{ firmware_type }}" class="text-decoration-none">
+                    {{ firmware_type }}
                 </a>
             </td>
         </tr>

@@ -5,7 +5,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Device Name</th>
+            <th>Firmware Type</th>
             <th>Serial Number</th>
             <th>Current Version</th>
         </tr>
@@ -14,8 +14,8 @@
     {% for dev in devices %}
         <tr>
             <td>
-                <a href="/device-types/{{ dev.device_name }}" class="text-decoration-none">
-                    {{ dev.device_name }}
+                <a href="/firmware-types/{{ dev.firmware_type }}" class="text-decoration-none">
+                    {{ dev.firmware_type }}
                 </a>
             </td>
                         <td>

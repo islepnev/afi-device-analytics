@@ -5,7 +5,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Device Name</th>
+            <th>Firmware Type</th>
             <th>Version</th>
             <th>Count</th>
         </tr>
@@ -13,7 +13,7 @@
     <tbody>
     {% for row in summary_rows %}
         <tr>
-            <td>{{ row.device_name|safe }}</td>
+            <td>{{ row.firmware_type|safe }}</td>
             <td>{{ row.version }}</td>
             <td>{{ row.count }}</td>
         </tr>

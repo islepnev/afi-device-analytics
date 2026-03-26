@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Devices for Firmware Type: {{ device_type }}</h2>
+<h2>Devices for Firmware Type: {{ firmware_type }}</h2>
 <p>Below is a list of all devices that belong to this firmware type:</p>
 <table class="table table-striped">
     <thead>
@@ -31,5 +31,5 @@
     {% endfor %}
     </tbody>
 </table>
-<a href="/device-types" class="btn btn-primary mt-3">Back to Firmware Types</a>
+<a href="/firmware-types" class="btn btn-primary mt-3">Back to Firmware Types</a>
 {% endblock %}
