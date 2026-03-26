@@ -13,14 +13,14 @@ def get_totals():
     """
     Calculate total counts:
     - Total devices (distinct serial numbers)
-    - Total device_name (Device Types, derived from base_name)
+    - Total device_name (Firmware Types, derived from base_name)
     - Total Firmware Versions (distinct base_name for the latest firmware per device)
     Fetch the last 10 loaded firmware records.
     """
     # Total devices: distinct serialHex
     total_devices = db.session.query(func.count(func.distinct(HwFirmware.serialHex))).scalar()
 
-    # Total device_name (Device Types): distinct device_name extracted from base_name
+    # Total device_name (Firmware Types): distinct device_name extracted from base_name
     base_names = db.session.query(HwFirmware.base_name).distinct()
     device_names = {pattern.match(bn.base_name).group("device_name") for bn in base_names if pattern.match(bn.base_name)}
     total_device_types = len(device_names)

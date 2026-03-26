@@ -1,10 +1,10 @@
 # Device Firmware Analytics
 
-A web-based application for analyzing firmware data deployed on devices. It provides insights into firmware versions, device types, and historical firmware loading activities.
+A web-based application for analyzing firmware data deployed on devices. It provides insights into firmware versions, firmware types, and historical firmware loading activities.
 
 ## Features
 
-- Summaries of devices, firmware versions, and device types.
+- Summaries of devices, firmware versions, and firmware types.
 - Drill-down views for individual devices and firmware details.
 - History of firmware loading activities.
 - Interactive UI with hyperlinks for navigation.
@@ -45,7 +45,7 @@ A web-based application for analyzing firmware data deployed on devices. It prov
 
 ### Usage
 
-- Visit the home page to see total counts for devices, firmware versions, and device types.
+- Visit the home page to see total counts for devices, firmware versions, and firmware types.
 - Click on any count to drill down into the details.
 - View the history page for the latest firmware loading activities.
 

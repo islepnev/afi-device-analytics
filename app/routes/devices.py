@@ -73,7 +73,7 @@ def device_detail(serial_number):
 
 def get_device_types():
     """
-    Fetch distinct device types (device_name) from base_name in hw_firmware.
+    Fetch distinct firmware types (device_name) from base_name in hw_firmware.
     """
     base_names = db.session.query(HwFirmware.base_name).distinct()
     device_names = {pattern.match(bn.base_name).group("device_name") for bn in base_names if pattern.match(bn.base_name)}
@@ -82,9 +82,9 @@ def get_device_types():
 @devices_bp.route("/device-types")
 def list_device_types():
     """
-    List distinct device types.
+    List distinct firmware types.
     """
-    current_app.logger.debug("Rendering device types list")
+    current_app.logger.debug("Rendering firmware types list")
     device_types = get_device_types()
     indexed_device_types = [(idx + 1, name) for idx, name in enumerate(device_types)]
     return render_template("device_types.html", indexed_device_types=indexed_device_types)
