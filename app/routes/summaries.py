@@ -56,8 +56,8 @@ def show_summaries():
 
     summary_rows = []
     total_count = 0
-    for (dev_name, ver), cnt in sorted(combo_map.items()):
-        summary_rows.append({"firmware_type": dev_name, "version": ver, "count": cnt})
+    for (firmware_type, ver), cnt in sorted(combo_map.items()):
+        summary_rows.append({"firmware_type": firmware_type, "version": ver, "count": cnt})
         total_count += cnt
 
     summary_rows.append({"firmware_type": "**Total**", "version": "", "count": total_count})

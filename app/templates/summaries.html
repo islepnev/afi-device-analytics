@@ -13,7 +13,11 @@
     <tbody>
     {% for row in summary_rows %}
         <tr>
-            <td>{{ row.firmware_type|safe }}</td>
+            <td>
+                <a href="/firmware-types/{{ row.firmware_type }}" class="text-decoration-none">
+                    {{ row.firmware_type }}
+                </a>
+            </td>
             <td>{{ row.version }}</td>
             <td>{{ row.count }}</td>
         </tr>
